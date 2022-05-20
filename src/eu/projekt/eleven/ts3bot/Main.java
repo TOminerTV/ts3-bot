@@ -42,7 +42,7 @@ public class Main
 
                 ts3Api = ts3Query.getApi();
                 ts3Api.login(botData.get("login").toString(), botData.get("password").toString());
-                ts3Api.selectVirtualServerByPort(Integer.parseInt(botData.get("port").toString()));
+                ts3Api.selectVirtualServerById(1);
                 ts3Api.moveClient(ts3Api.whoAmI().getId(), Integer.parseInt(botData.get("channel").toString()));
 
                 if(!ts3Api.whoAmI().getNickname().equals(botData.get("name").toString()))
@@ -52,6 +52,11 @@ public class Main
             {
                 System.out.println(UnixSystemColors.RED + "Bot cant connected to: " + botData.get("host").toString());
             }
+
+            // create data folder
+            File dataFolder = new File(getBotPath() + "/data");
+            if(!dataFolder.exists())
+                dataFolder.mkdirs();
 
 // TODO::            ts3Query.exit();
 
